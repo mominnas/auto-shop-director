@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Contoso.App (Package)": {
+      "commandName": "MsixPackage"
+    }
+  }
+}
