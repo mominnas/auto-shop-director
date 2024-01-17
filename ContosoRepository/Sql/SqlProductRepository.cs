@@ -1,11 +1,11 @@
-﻿using Contoso.Models;
+﻿using MMN.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Contoso.Repository.Sql
+namespace MMN.Repository.Sql
 {
     /// <summary>
     /// Contains methods for interacting with the products backend using 

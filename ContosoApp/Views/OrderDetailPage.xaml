@@ -1,10 +1,10 @@
 <Page
-    x:Class="Contoso.App.Views.OrderDetailPage"
+    x:Class="MMN.App.Views.OrderDetailPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:Contoso.Models"
+    xmlns:models="using:MMN.Models"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:sys="using:System"
     NavigationCacheMode="Required"

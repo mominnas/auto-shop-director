@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 using Microsoft.Identity.Client;
 using Microsoft.Identity.Client.Extensions.Msal;
 
-namespace Contoso.App
+namespace MMN.App
 {
     /// <summary>
     /// Handles user authentication and getting user info from the Microsoft Graph API.

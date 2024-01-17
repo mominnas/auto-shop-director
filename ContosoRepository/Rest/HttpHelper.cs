@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contoso.Repository.Rest
+namespace MMN.Repository.Rest
 {
     /// <summary>
     /// Wrapper for making strongly-typed REST calls. 

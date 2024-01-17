@@ -1,6 +1,6 @@
-﻿using Contoso.Models;
+﻿using MMN.Models;
 
-namespace Contoso.Repository.Rest
+namespace MMN.Repository.Rest
 {
     /// <summary>
     /// Contains methods for interacting with the app backend using REST. 

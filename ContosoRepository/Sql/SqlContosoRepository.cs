@@ -1,7 +1,7 @@
-﻿using Contoso.Models;
+﻿using MMN.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Contoso.Repository.Sql
+namespace MMN.Repository.Sql
 {
     /// <summary>
     /// Contains methods for interacting with the app backend using 

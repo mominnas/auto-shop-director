@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.WinUI.UI.Controls;
 
-namespace Contoso.App.Views
+namespace MMN.App.Views
 {
     /// <summary>
     /// Extension methods used with the DataGrid control to support sorting.

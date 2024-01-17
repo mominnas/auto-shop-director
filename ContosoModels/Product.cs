@@ -1,4 +1,4 @@
-namespace Contoso.Models
+namespace MMN.Models
 {
     /// <summary>
     /// Represents a product.

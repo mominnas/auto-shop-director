@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Contoso.Models
+namespace MMN.Models
 {
     /// <summary>
     /// Represents a customer order.

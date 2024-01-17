@@ -1,10 +1,10 @@
-using Contoso.Models;
+using MMN.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Contoso.Repository.Rest
+namespace MMN.Repository.Rest
 {
     /// <summary>
     /// Contains methods for interacting with the customers backend using REST. 

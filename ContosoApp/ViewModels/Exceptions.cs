@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contoso.App.ViewModels
+namespace MMN.App.ViewModels
 {
     /// <summary>
     /// Represents an exception that occurs when there's an error saving an order.

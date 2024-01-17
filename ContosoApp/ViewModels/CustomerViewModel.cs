@@ -4,10 +4,10 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.UI.Dispatching;
 using CommunityToolkit.WinUI;
-using Contoso.Models;
+using MMN.Models;
 
 
-namespace Contoso.App.ViewModels
+namespace MMN.App.ViewModels
 {
     /// <summary>
     /// Provides a bindable wrapper for the Customer model class, encapsulating various services for access by the UI.

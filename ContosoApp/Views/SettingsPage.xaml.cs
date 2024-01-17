@@ -27,9 +27,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
 using Windows.System;
-using Contoso.Repository.Sql;
+using MMN.Repository.Sql;
 
-namespace Contoso.App.Views
+namespace MMN.App.Views
 {
     public sealed partial class SettingsPage : Page
     {

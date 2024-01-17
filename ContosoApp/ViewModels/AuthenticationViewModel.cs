@@ -11,7 +11,7 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 
-namespace Contoso.App.ViewModels
+namespace MMN.App.ViewModels
 {
     /// <summary>
     /// Handles user authentication and getting user info from the Microsoft Graph API.

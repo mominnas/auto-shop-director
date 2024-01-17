@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 
-namespace Contoso.App.ViewModels
+namespace MMN.App.ViewModels
 {
     /// <summary>
     /// Provides static methods for use in x:Bind function binding to convert bound values to the required value.

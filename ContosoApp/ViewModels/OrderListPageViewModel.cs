@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.UI.Dispatching;
 using CommunityToolkit.WinUI;
-using Contoso.Models;
+using MMN.Models;
 
-namespace Contoso.App.ViewModels
+namespace MMN.App.ViewModels
 {
     /// <summary>
     /// Encapsulates data for the OrderListPage. The page UI

@@ -9,9 +9,9 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI.Controls;
-using Contoso.App.ViewModels;
+using MMN.App.ViewModels;
 
-namespace Contoso.App.Views
+namespace MMN.App.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

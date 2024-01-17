@@ -1,6 +1,6 @@
 using System;
 
-namespace Contoso.Models
+namespace MMN.Models
 {
     /// <summary>
     /// Base class for database entities.

@@ -30,13 +30,13 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Windows.ApplicationModel;
 using Windows.Globalization;
 using Windows.Storage;
-using Contoso.App.ViewModels;
-using Contoso.App.Views;
-using Contoso.Repository;
-using Contoso.Repository.Rest;
-using Contoso.Repository.Sql;
+using MMN.App.ViewModels;
+using MMN.App.Views;
+using MMN.Repository;
+using MMN.Repository.Rest;
+using MMN.Repository.Sql;
 
-namespace Contoso.App
+namespace MMN.App
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

@@ -1,4 +1,4 @@
-﻿namespace Contoso.Repository
+﻿namespace MMN.Repository
 {
     /// <summary>
     /// Contains constant values you'll need to insert before running the sample. 

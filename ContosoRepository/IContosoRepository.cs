@@ -1,6 +1,6 @@
-﻿using Contoso.Models;
+﻿using MMN.Models;
 
-namespace Contoso.Repository
+namespace MMN.Repository
 {
     /// <summary>
     /// Defines methods for interacting with the app backend.

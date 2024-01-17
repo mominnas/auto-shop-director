@@ -1,6 +1,6 @@
-﻿using Contoso.Models;
+﻿using MMN.Models;
 
-namespace Contoso.App.ViewModels
+namespace MMN.App.ViewModels
 {
     /// <summary>
     /// Provides a bindable wrapper for the LineItem model class.

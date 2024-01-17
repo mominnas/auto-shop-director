@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using muxc = Microsoft.UI.Xaml.Controls;
 
-namespace Contoso.App.UserControls
+namespace MMN.App.UserControls
 {
     public sealed partial class CollapsibleSearchBox : UserControl
     {

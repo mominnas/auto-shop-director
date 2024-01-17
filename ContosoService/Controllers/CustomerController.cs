@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Contoso.Models;
+using MMN.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Contoso.Service.Controllers
+namespace MMN.Service.Controllers
 {
     namespace Contoso.Service.Controllers
     {

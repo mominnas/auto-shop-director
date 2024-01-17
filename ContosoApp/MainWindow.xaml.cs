@@ -24,7 +24,7 @@
 
 using Microsoft.UI.Xaml;
 
-namespace Contoso.App
+namespace MMN.App
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.

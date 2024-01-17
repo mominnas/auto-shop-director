@@ -6,10 +6,10 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.ApplicationModel.Email;
 using CommunityToolkit.WinUI.UI.Controls;
-using Contoso.Models;
-using Contoso.App.ViewModels;
+using MMN.Models;
+using MMN.App.ViewModels;
 
-namespace Contoso.App.Views
+namespace MMN.App.Views
 {
     /// <summary>
     /// Displays the list of orders.

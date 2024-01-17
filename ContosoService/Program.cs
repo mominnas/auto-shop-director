@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
-using Contoso.Models;
-using Constants = Contoso.Repository.Constants;
-using Contoso.Repository.Sql;
+using MMN.Models;
+using Constants = MMN.Repository.Constants;
+using MMN.Repository.Sql;
 
 
 var builder = WebApplication.CreateBuilder(args);

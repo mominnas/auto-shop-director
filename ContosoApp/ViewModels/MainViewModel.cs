@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Dispatching;
 using CommunityToolkit.WinUI;
 
-namespace Contoso.App.ViewModels
+namespace MMN.App.ViewModels
 {
     /// <summary>
     /// Provides data and commands accessible to the entire app.  

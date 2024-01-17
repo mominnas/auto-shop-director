@@ -29,9 +29,9 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
 using muxc = Microsoft.UI.Xaml.Controls;
 using Windows.System;
-using Contoso.App.Views;
+using MMN.App.Views;
 
-namespace Contoso.App
+namespace MMN.App
 {
     /// <summary>
     /// The "chrome" layer of the app that provides top-level navigation with

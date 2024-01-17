@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 
-namespace Contoso.App.UserControls
+namespace MMN.App.UserControls
 {
     public sealed partial class AuthenticationControl : UserControl
     {

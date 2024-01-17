@@ -1,7 +1,7 @@
-﻿using Contoso.Models;
+﻿using MMN.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Contoso.Service.Controllers
+namespace MMN.Service.Controllers
 {
     /// <summary>
     /// Contains methods for interacting with order data.

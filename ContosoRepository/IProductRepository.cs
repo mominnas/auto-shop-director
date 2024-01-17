@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Contoso.Models
+namespace MMN.Models
 {
     /// <summary>
     /// Defines methods for interacting with the products backend.
