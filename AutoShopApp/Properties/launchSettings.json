@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "AutoShop.App (Package)": {
+      "commandName": "MsixPackage"
+    }
+  }
+}
