@@ -10,6 +10,9 @@ using Microsoft.Graph;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Azure.Identity;
+using Azure.Core;
+using System.Threading;
 
 namespace MMN.App.ViewModels
 {
@@ -188,13 +191,11 @@ namespace MMN.App.ViewModels
             var accounts = await MsalHelper.GetAccountsAsync();
             var domain = accounts?.First().Username.Split('@')[1] ?? string.Empty;
 
-            var graph = new GraphServiceClient(new DelegateAuthenticationProvider(message =>
-            {
-                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                return Task.CompletedTask;
-            }));
+            var tokenCredential = new TokenCredentialAdapter(token);
+            var graph = new GraphServiceClient(tokenCredential);
+            
 
-            var me = await graph.Me.Request().GetAsync();
+            var me = await graph.Me.GetAsync();
 
             App.Window.DispatcherQueue.TryEnqueue(
                 DispatcherQueuePriority.Normal, () =>
@@ -285,5 +286,27 @@ namespace MMN.App.ViewModels
                 prop.SetValue(this, true);
             });
         }
+    }
+
+    public class TokenCredentialAdapter : TokenCredential
+    {
+        private readonly string _token;
+
+        public TokenCredentialAdapter(string token)
+        {
+            _token = token;
+        }
+
+        public override AccessToken GetToken(TokenRequestContext requestContext, CancellationToken cancellationToken)
+        {
+            return new AccessToken(_token, DateTimeOffset.UtcNow.AddHours(1)); // Adjust token expiration as needed
+        }
+
+
+        public override ValueTask<AccessToken> GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+        {
+            return new ValueTask<AccessToken>(new AccessToken(_token, DateTimeOffset.UtcNow.AddHours(1))); // Adjust token expiration as needed
+        }
+
     }
 }
