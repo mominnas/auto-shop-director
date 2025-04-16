@@ -24,6 +24,47 @@ namespace MMN.App.ViewModels
         public ObservableCollection<CustomerViewModel> Customers { get; }
             = new ObservableCollection<CustomerViewModel>();
 
+
+
+
+
+
+
+        public ObservableCollection<ProductViewModel> Products { get; } = new ObservableCollection<ProductViewModel>();
+
+        private ProductViewModel _selectedProduct;
+
+        public ProductViewModel SelectedProduct
+        {
+            get => _selectedProduct;
+            set => Set(ref _selectedProduct, value);
+        }
+
+        public async Task GetProductListAsync()
+        {
+            IsLoading = true;
+            var products = await App.Repository.Products.GetAsync();
+            if (products == null)
+            {
+                IsLoading = false;
+                return;
+            }
+
+            _ = dispatcherQueue.EnqueueAsync(() =>
+            {
+                Products.Clear();
+                foreach (var p in products)
+                {
+                    Products.Add(new ProductViewModel(p));
+                }
+                IsLoading = false;
+            });
+        }
+
+
+
+
+
         private CustomerViewModel _selectedCustomer;
 
         /// <summary>

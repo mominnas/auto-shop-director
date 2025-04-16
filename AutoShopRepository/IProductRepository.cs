@@ -23,5 +23,16 @@ namespace MMN.Models
         /// Returns all products with a data field matching the start of the given string. 
         /// </summary>
         Task<IEnumerable<Product>> GetAsync(string search);
+
+        /// <summary>
+        /// Adds a new order if the order does not exist, updates the 
+        /// existing order otherwise.
+        /// </summary>
+        Task<Product> UpsertAsync(Product product);
+
+        /// <summary>
+        /// Deletes a product.
+        /// </summary>
+        Task DeleteAsync(Guid productId);
     }
 }

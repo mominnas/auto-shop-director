@@ -27,5 +27,12 @@ namespace MMN.Repository.Rest
 
         public async Task<IEnumerable<Product>> GetAsync(string search) =>
             await _http.GetAsync<IEnumerable<Product>>($"product/search?value={search}", _accessToken);
+
+
+        public async Task<Product> UpsertAsync(Product product) =>
+            await _http.PostAsync<Product, Product>("product", product, _accessToken);
+
+        public async Task DeleteAsync(Guid productId) =>
+            await _http.DeleteAsync("product", productId, _accessToken);
     }
 }

@@ -30,6 +30,37 @@ namespace MMN.App.ViewModels
         }
     }
 
+
+
+    /// <summary>
+    /// Represents an exception that occurs when there's an error saving a product.
+    /// </summary>
+    public class ProductSavingException : Exception
+    {
+        /// <summary>
+        /// Initializes a new instance of the ProductSavingException class with a default error message.
+        /// </summary>
+        public ProductSavingException() : base("Error saving a product.")
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the ProductSavingException class with the specified error message.
+        /// </summary>
+        public ProductSavingException(string message) : base(message)
+        {
+        }  
+        
+        ///<summary>
+        /// Initializes a new instance of the ProductSavingException class with 
+        /// the specified error message and inner exception.
+        /// </summary>
+        public ProductSavingException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+
+
     /// <summary>
     /// Represents an exception that occurs when there's an error deleting an order.
     /// </summary>

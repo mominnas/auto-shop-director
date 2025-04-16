@@ -57,6 +57,11 @@
                     Content="{x:Bind OrderListLabel}" 
                     ToolTipService.ToolTip="{x:Bind OrderListLabel}"
                     Icon="Shop"/>
+                <muxc:NavigationViewItem
+                    x:Name="ProductsMenuItem"
+                    Content="{x:Bind ProductListLabel}" 
+                    ToolTipService.ToolTip="{x:Bind ProductListLabel}"
+                    Icon="Shop"/>
             </muxc:NavigationView.MenuItems>
 
             

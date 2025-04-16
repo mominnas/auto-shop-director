@@ -47,5 +47,32 @@ namespace MMN.Repository.Sql
             .AsNoTracking()
             .ToListAsync();
         }
+
+        public async Task<Product> UpsertAsync(Product product)
+        {
+            var existing = _db.Products
+                .FirstOrDefault(p => p.Id == product.Id);
+            if (null == existing)
+            {
+                _db.Products.Add(product);
+            }
+            else
+            {
+                _db.Entry(existing).CurrentValues.SetValues(product);
+            }
+            await _db.SaveChangesAsync();
+            return product;
+        }
+
+        public async Task DeleteAsync(Guid productId)
+        {
+            var match = await _db.Products.FirstOrDefaultAsync(product => product.Id == productId);
+            if (null != match)
+            {
+                _db.Products.Remove(match);
+            }
+            await _db.SaveChangesAsync();
+        }
+
     }
 }

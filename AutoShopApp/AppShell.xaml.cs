@@ -90,6 +90,8 @@ namespace MMN.App
 
         public readonly string OrderListLabel = "Order list";
 
+        public readonly string ProductListLabel = "Product list";
+
         /// <summary>
         /// Navigates to the page corresponding to the tapped item.
         /// </summary>
@@ -99,7 +101,8 @@ namespace MMN.App
             var pageType =
                 args.IsSettingsInvoked ? typeof(SettingsPage) :
                 label == CustomerListLabel ? typeof(CustomerListPage) :
-                label == OrderListLabel ? typeof(OrderListPage) : null;
+                label == OrderListLabel ? typeof(OrderListPage) : 
+                label == ProductListLabel ? typeof(ProductsPage) : null;
             if (pageType != null && pageType != AppFrame.CurrentSourcePageType)
             {
                 AppFrame.Navigate(pageType);
@@ -125,6 +128,10 @@ namespace MMN.App
                 else if (e.SourcePageType == typeof(SettingsPage))
                 {
                     NavView.SelectedItem = NavView.SettingsItem;
+                }
+                else if (e.SourcePageType == typeof(ProductsPage))
+                {
+                    NavView.SelectedItem = ProductsMenuItem;
                 }
             }
         }
