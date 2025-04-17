@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="AutoShopApp">
+        <!-- Files will be added here -->
+      </Directory>
+    </StandardDirectory>
+
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <!-- Main executable -->
+      <Component Id="MainExecutable" Guid="54188511-fad0-4f21-b2af-37a3c85e5734">
+        <File Id="AutoShopAppExe" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.App.exe" KeyPath="yes" />
+      </Component>
+
+      <!-- DLL Dependencies - Split into individual components since they're versioned -->
+      <Component Id="AutoShopModelsComponent" Guid="*">
+        <File Id="AutoShopModels" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.Models.dll" KeyPath="yes" />
+      </Component>
+
+      <Component Id="AutoShopRepositoryComponent" Guid="*">
+        <File Id="AutoShopRepository" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.Repository.dll" KeyPath="yes" />
+      </Component>
+
+      <Component Id="EntityFrameworkSqliteComponent" Guid="*">
+        <File Id="EntityFrameworkSqlite" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Microsoft.EntityFrameworkCore.Sqlite.dll" KeyPath="yes" />
+      </Component>
+
+      <Component Id="MicrosoftGraphComponent" Guid="*">
+        <File Id="MicrosoftGraph" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Microsoft.Graph.dll" KeyPath="yes" />
+      </Component>
+
+      <!-- Content Files - These are unversioned, can stay together -->
+      <Component Id="ContentFiles" Guid="*">
+        <!---<File Id="ContosoDb" Source="$(var.SolutionDir)AutoShopApp\Assets\Contoso.db" KeyPath="yes" /> -->
+        <File Id="AppManifest" Source="$(var.SolutionDir)AutoShopApp\app.manifest" />
+      </Component>
+
+      <!-- Assets - These are unversioned image files, can stay together -->
+      <Component Id="AssetFiles" Guid="9f009c8a-6b54-4632-bb61-18990d681496">
+        <File Id="SplashScreen" Source="$(var.SolutionDir)AutoShopApp\Assets\SplashScreen.scale-200.png" KeyPath="yes" />
+        <File Id="LockScreenLogo" Source="$(var.SolutionDir)AutoShopApp\Assets\LockScreenLogo.scale-200.png" />
+        <File Id="Square150x150Logo" Source="$(var.SolutionDir)AutoShopApp\Assets\Square150x150Logo.scale-200.png" />
+        <File Id="Square44x44Logo" Source="$(var.SolutionDir)AutoShopApp\Assets\Square44x44Logo.scale-200.png" />
+        <File Id="Wide310x150Logo" Source="$(var.SolutionDir)AutoShopApp\Assets\Wide310x150Logo.scale-200.png" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

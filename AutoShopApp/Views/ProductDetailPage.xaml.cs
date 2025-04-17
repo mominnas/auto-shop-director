@@ -13,7 +13,7 @@ namespace MMN.App.Views
 
         public ProductDetailPage()
         {
-            //this.InitializeComponent();
+            this.InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
