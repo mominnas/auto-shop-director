@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<Fragment>
+		<Directory Id="ROOTDIR" Name="SourceDir">
+			<Directory Id="ProgramFiles64Folder">
+				<Directory Id="INSTALLFOLDER" Name="AutoShopApp">
+					<!-- Files will be added here -->
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id="MainExecutable" Guid="54188511-fad0-4f21-b2af-37a3c85e5734">
+				<File Id="AutoShopAppExe" Source="$(SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.App.exe" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

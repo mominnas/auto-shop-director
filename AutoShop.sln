@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoShop.Repository", "Auto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoShop.Service", "AutoShopService\AutoShop.Service.csproj", "{BFF5186F-8D02-4267-BDC5-722AEDB32039}"
 EndProject
+Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "AutoShopMSIPackage", "AutoShopMSIPackage\AutoShopMSIPackage\AutoShopMSIPackage.wixproj", "{93F14333-1F85-470E-904A-FBD494DA99CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +122,26 @@ Global
 		{BFF5186F-8D02-4267-BDC5-722AEDB32039}.Release|x64.Build.0 = Release|Any CPU
 		{BFF5186F-8D02-4267-BDC5-722AEDB32039}.Release|x86.ActiveCfg = Release|Any CPU
 		{BFF5186F-8D02-4267-BDC5-722AEDB32039}.Release|x86.Build.0 = Release|Any CPU
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|Any CPU.Build.0 = Debug|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|ARM.ActiveCfg = Debug|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|ARM.Build.0 = Debug|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|arm64.ActiveCfg = Debug|ARM64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|arm64.Build.0 = Debug|ARM64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|x64.ActiveCfg = Debug|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|x64.Build.0 = Debug|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|x86.ActiveCfg = Debug|x86
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Debug|x86.Build.0 = Debug|x86
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|Any CPU.ActiveCfg = Release|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|Any CPU.Build.0 = Release|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|ARM.ActiveCfg = Release|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|ARM.Build.0 = Release|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|arm64.ActiveCfg = Release|ARM64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|arm64.Build.0 = Release|ARM64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|x64.ActiveCfg = Release|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|x64.Build.0 = Release|x64
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|x86.ActiveCfg = Release|x86
+		{93F14333-1F85-470E-904A-FBD494DA99CC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
