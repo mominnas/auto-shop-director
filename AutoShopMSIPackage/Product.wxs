@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-	<Package Name="AutoShopApp" Language="1033" Version="1.0.0.0" Manufacturer="YourCompany" UpgradeCode="54188511-fad0-4f21-b2af-37a3c85e5734" InstallerVersion="500" Compressed="yes">
+	<Package Name="AutoShopApp" Language="1033" Version="1.0.0.0" Manufacturer="MMN" UpgradeCode="54188511-fad0-4f21-b2af-37a3c85e5734" InstallerVersion="500" Compressed="yes">
 		<MediaTemplate />
-		<Feature Id="MainFeature" Title="AutoShopApp" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
+    <Feature Id="ProductFeature" Title="AutoShop Application" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="AssetComponents" />
+    </Feature>
 	</Package>
 </Wix>

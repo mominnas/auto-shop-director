@@ -3,45 +3,59 @@
   <Fragment>
     <StandardDirectory Id="ProgramFiles64Folder">
       <Directory Id="INSTALLFOLDER" Name="AutoShopApp">
-        <!-- Files will be added here -->
+        <!-- Create subdirectories -->
+        <Directory Id="ASSETSFOLDER" Name="Assets" />
+        <Directory Id="RUNTIMEFOLDER" Name="Runtime" />
       </Directory>
     </StandardDirectory>
 
+    <!-- Component groups will be referenced in Package.wxs -->
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-      <!-- Main executable -->
+      <!-- Main executable and primary DLLs -->
       <Component Id="MainExecutable" Guid="54188511-fad0-4f21-b2af-37a3c85e5734">
         <File Id="AutoShopAppExe" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.App.exe" KeyPath="yes" />
+        <File Id="AutoShopModels" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.Models.dll" />
+        <File Id="AutoShopRepository" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.Repository.dll" />
       </Component>
 
-      <!-- DLL Dependencies - Split into individual components since they're versioned -->
-      <Component Id="AutoShopModelsComponent" Guid="*">
-        <File Id="AutoShopModels" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.Models.dll" KeyPath="yes" />
+      <!-- Windows App SDK Framework package runtime components -->
+      <Component Id="WindowsAppSDKFiles" Guid="*">
+        <File Id="WindowsAppSDK" 
+              Source="$(var.SolutionDir)packages\Microsoft.WindowsAppSDK.1.7.250401001\build\native\x64\Microsoft.WindowsAppRuntime.dll" />
+        <File Id="WindowsAppSDKBootstrap" 
+              Source="$(var.SolutionDir)packages\Microsoft.WindowsAppSDK.1.7.250401001\build\native\x64\Microsoft.WindowsAppRuntime.Bootstrap.dll" />
+        <File Id="WindowsAppRuntimeDWrite" 
+              Source="$(var.SolutionDir)packages\Microsoft.WindowsAppSDK.1.7.250401001\build\native\x64\Microsoft.WindowsAppRuntime.DWrite.dll" />
       </Component>
 
-      <Component Id="AutoShopRepositoryComponent" Guid="*">
-        <File Id="AutoShopRepository" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShop.Repository.dll" KeyPath="yes" />
+      <!-- NuGet Package Dependencies -->
+      <Component Id="NuGetDependencies" Guid="*">
+        <File Id="EntityFrameworkCore" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Microsoft.EntityFrameworkCore.dll" />
+        <File Id="EntityFrameworkSqlite" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Microsoft.EntityFrameworkCore.Sqlite.dll" />
+        <File Id="MicrosoftGraph" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Microsoft.Graph.dll" />
+        <File Id="NewtonsoftJson" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Newtonsoft.Json.dll" />
+        <File Id="CommunityToolkitCommon" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\CommunityToolkit.Common.dll" />
+        <File Id="AzureIdentity" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Azure.Identity.dll" />
+        <File Id="MicrosoftIdentityClient" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Microsoft.Identity.Client.dll" />
       </Component>
 
-      <Component Id="EntityFrameworkSqliteComponent" Guid="*">
-        <File Id="EntityFrameworkSqlite" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Microsoft.EntityFrameworkCore.Sqlite.dll" KeyPath="yes" />
+      
+    </ComponentGroup>
+
+    <!-- Assets ComponentGroup -->
+    <ComponentGroup Id="AssetComponents" Directory="ASSETSFOLDER">
+      <!-- Database -->
+      <Component Id="DatabaseFile" Guid="*">
+        <File Id="ContosoDB" Source="$(var.SolutionDir)AutoShopApp\Assets\Contoso.db" KeyPath="yes" />
       </Component>
 
-      <Component Id="MicrosoftGraphComponent" Guid="*">
-        <File Id="MicrosoftGraph" Source="$(var.SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\Microsoft.Graph.dll" KeyPath="yes" />
-      </Component>
-
-      <!-- Content Files - These are unversioned, can stay together -->
-      <Component Id="ContentFiles" Guid="*">
-        <!---<File Id="ContosoDb" Source="$(var.SolutionDir)AutoShopApp\Assets\Contoso.db" KeyPath="yes" /> -->
-        <File Id="AppManifest" Source="$(var.SolutionDir)AutoShopApp\app.manifest" />
-      </Component>
-
-      <!-- Assets - These are unversioned image files, can stay together -->
-      <Component Id="AssetFiles" Guid="9f009c8a-6b54-4632-bb61-18990d681496">
+      <!-- Images -->
+      <Component Id="ImageAssets" Guid="*">
         <File Id="SplashScreen" Source="$(var.SolutionDir)AutoShopApp\Assets\SplashScreen.scale-200.png" KeyPath="yes" />
         <File Id="LockScreenLogo" Source="$(var.SolutionDir)AutoShopApp\Assets\LockScreenLogo.scale-200.png" />
         <File Id="Square150x150Logo" Source="$(var.SolutionDir)AutoShopApp\Assets\Square150x150Logo.scale-200.png" />
         <File Id="Square44x44Logo" Source="$(var.SolutionDir)AutoShopApp\Assets\Square44x44Logo.scale-200.png" />
+        <File Id="Square44x44LogoUnplated" Source="$(var.SolutionDir)AutoShopApp\Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
         <File Id="Wide310x150Logo" Source="$(var.SolutionDir)AutoShopApp\Assets\Wide310x150Logo.scale-200.png" />
       </Component>
     </ComponentGroup>
