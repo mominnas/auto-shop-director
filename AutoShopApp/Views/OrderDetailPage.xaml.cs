@@ -217,7 +217,7 @@ namespace MMN.App.Views
         /// <summary>
         /// Adds the new line item to the list of line items.
         /// </summary>
-        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        private async void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.LineItems.Add(ViewModel.NewLineItem.Model);
             ClearCandidateProduct();
@@ -243,8 +243,11 @@ namespace MMN.App.Views
         /// <summary>
         /// Removes a line item from the order.
         /// </summary>
-        private void RemoveProduct_Click(object sender, RoutedEventArgs e) =>
+        private async void RemoveProduct_Click(object sender, RoutedEventArgs e)
+        {
             ViewModel.LineItems.Remove((sender as FrameworkElement).DataContext as LineItem);
+            await ViewModel.SaveOrderAsync(); // Save changes to the database
+        }
 
         /// <summary>
         /// Fired when a property value changes. 

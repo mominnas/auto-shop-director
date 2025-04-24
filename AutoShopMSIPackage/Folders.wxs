@@ -1,9 +1,0 @@
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Fragment>
-    <DirectoryRef Id="INSTALLFOLDER">
-      <Component Id="MainExecutable" Guid="54188511-fad0-4f21-b2af-37a3c85e5734">
-        <File Id="AutoShopAppExe" Source="$(SolutionDir)AutoShopApp\bin\x64\Debug\net9.0-windows10.0.22000.0\AutoShopApp.exe" />
-      </Component>
-    </DirectoryRef>
-  </Fragment>
-</Wix>

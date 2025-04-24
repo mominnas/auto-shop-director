@@ -10,11 +10,25 @@
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-    <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <PackageCertificateThumbprint>0F36116D18BD5BB22D7ED93833B41526BA0CC996</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <WindowsPackageType>MSIX</WindowsPackageType>
+    <!--<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>-->
+    <SelfContained>true</SelfContained>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Auto</AppxBundle>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <AppInstallerUri>C:\Users\Momin Naseem\Documents\lecole\Software\auto-shop-director\MSI</AppInstallerUri>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <AppxPackageDir>C:\Users\Momin Naseem\Documents\lecole\Software\auto-shop-director\MSI\</AppxPackageDir>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <IsPublishable>True</IsPublishable>
@@ -36,7 +50,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AppShell.xaml" />
-    <None Remove="Assets\Contoso.db" />
     <None Remove="Assets\LargeTile.scale-100.png" />
     <None Remove="Assets\LargeTile.scale-125.png" />
     <None Remove="Assets\LargeTile.scale-150.png" />

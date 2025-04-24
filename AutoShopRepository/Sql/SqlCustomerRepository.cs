@@ -58,15 +58,23 @@ namespace MMN.Repository.Sql
 
         public async Task<Customer> UpsertAsync(Customer customer)
         {
-            var current = await _db.Customers.FirstOrDefaultAsync(_customer => _customer.Id == customer.Id);
-            if (null == current)
+            if (customer.Id == Guid.Empty)
             {
+                customer.Id = Guid.NewGuid(); // Ensure a new unique Id is generated
+            }
+
+            var current = await _db.Customers.FirstOrDefaultAsync(_customer => _customer.Id == customer.Id);
+            if (current == null)
+            {
+                // Add the new customer
                 _db.Customers.Add(customer);
             }
             else
             {
+                // Attach the existing customer to the context and update its values
                 _db.Entry(current).CurrentValues.SetValues(customer);
             }
+
             await _db.SaveChangesAsync();
             return customer;
         }

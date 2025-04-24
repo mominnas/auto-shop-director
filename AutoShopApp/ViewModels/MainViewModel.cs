@@ -61,6 +61,20 @@ namespace MMN.App.ViewModels
             });
         }
 
+        public void SyncProducts()
+        {
+            Task.Run(async () =>
+            {
+                foreach (var modifiedProduct in Products
+                    .Where(product => product.IsModified).Select(product => product.Model))
+                {
+                    await App.Repository.Products.UpsertAsync(modifiedProduct);
+                }
+
+                await GetProductListAsync();
+            });
+        }
+
 
 
 

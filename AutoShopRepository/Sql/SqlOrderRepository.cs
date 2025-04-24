@@ -64,9 +64,53 @@ namespace MMN.Repository.Sql
 
         public async Task<Order> UpsertAsync(Order order)
         {
+            // Ensure order has a valid customer reference
+            if (order.Customer != null)
+            {
+                // Check if customer exists in the current context
+                var existingCustomer = await _db.Customers
+                    .FirstOrDefaultAsync(c => c.Id == order.Customer.Id);
+
+                if (existingCustomer != null)
+                {
+                    // Use the existing customer reference from the context
+                    order.Customer = existingCustomer;
+                    order.CustomerId = existingCustomer.Id;
+                }
+            }
+
+
+
+            // Ensure line items have valid product references
+            if (order.LineItems != null)
+            {
+                foreach (var lineItem in order.LineItems)
+                {
+                    if (lineItem.Product != null)
+                    {
+                        var existingProduct = await _db.Products
+                            .FirstOrDefaultAsync(p => p.Id == lineItem.Product.Id);
+
+                        if (existingProduct != null)
+                        {
+                            // Use the existing product reference
+                            lineItem.Product = existingProduct;
+                            lineItem.ProductId = existingProduct.Id;
+                            lineItem.Order = order;
+                            lineItem.OrderId = order.Id;
+                            lineItem.Quantity = lineItem.Quantity;
+                        }
+                    }
+                }
+            }
+
+
+
             var existing = await _db.Orders.FirstOrDefaultAsync(_order => _order.Id == order.Id);
+
             if (null == existing)
             {
+                // New order
                 order.InvoiceNumber = _db.Orders.Max(_order => _order.InvoiceNumber) + 1;
                 _db.Orders.Add(order);
             }
@@ -74,6 +118,7 @@ namespace MMN.Repository.Sql
             {
                 _db.Entry(existing).CurrentValues.SetValues(order);
             }
+
             await _db.SaveChangesAsync();
             return order;
         }

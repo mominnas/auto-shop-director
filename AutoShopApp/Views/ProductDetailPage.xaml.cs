@@ -27,10 +27,18 @@ namespace MMN.App.Views
             try
             {
                 await ViewModel.SaveProductAsync();
+                App.ViewModel.SyncProducts(); // Refresh the product list
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Handle any errors that occurred during the save process.
+                var dialog = new ContentDialog()
+                {
+                    Title = "Unable to save",
+                    Content = $"There was an error saving your product:\n{ex.Message}",
+                    PrimaryButtonText = "OK"
+                };
+                dialog.XamlRoot = App.Window.Content.XamlRoot;
+                await dialog.ShowAsync();
             }
         }
     }

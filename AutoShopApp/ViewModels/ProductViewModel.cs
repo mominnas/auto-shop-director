@@ -1,15 +1,16 @@
-﻿using MMN.Models;
+﻿using CommunityToolkit.WinUI;
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml.Controls;
+using MMN.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using Microsoft.UI.Dispatching;
-using CommunityToolkit.WinUI;
-//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.ComponentModel;
-using System.Collections.Specialized;
 
 
 namespace MMN.App.ViewModels
@@ -20,6 +21,9 @@ namespace MMN.App.ViewModels
     public class ProductViewModel : BindableBase
     {
         private DispatcherQueue dispatcherQueue = DispatcherQueue.GetForCurrentThread();
+
+        private Product _model;
+
 
         /// <summary>
         /// Initializes a new instance of the ProductViewModel class that wraps the specified Product object.
@@ -41,7 +45,34 @@ namespace MMN.App.ViewModels
         /// <summary>
         /// Gets the underlying Product object.
         /// </summary>
-        public Product Model { get; set; }
+        public Product Model
+        {
+            get => _model;
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException(nameof(value), "Model cannot be null.");
+                }
+
+                if (_model != value)
+                {
+                    _model = value;
+
+                    // Raise the PropertyChanged event for all properties.
+                    OnPropertyChanged(string.Empty);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that indicates whether to show a progress bar. 
+        /// </summary>
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => Set(ref _isLoading, value);
+        }
 
         /// <summary>
         /// Gets or sets the product's ID.
@@ -54,8 +85,8 @@ namespace MMN.App.ViewModels
                 if (Model.Id != value)
                 {
                     Model.Id = value;
-                    OnPropertyChanged();
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -71,8 +102,8 @@ namespace MMN.App.ViewModels
                 if (Model.Name != value)
                 {
                     Model.Name = value;
-                    OnPropertyChanged();
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -92,23 +123,8 @@ namespace MMN.App.ViewModels
         /// <summary>
         /// Gets or sets a value that indicates whether the underlying model has been modified. 
         /// </summary>
-        public bool IsModified
-        {
-            get => _IsModified;
-            set
-            {
-                if (value != _IsModified)
-                {
-                    // Only record changes after the order has loaded. 
-                    if (IsLoaded)
-                    {
-                        _IsModified = value;
-                        OnPropertyChanged();
-                        OnPropertyChanged(nameof(CanRevert));
-                    }
-                }
-            }
-        }
+        public bool IsModified { get; set; }
+
 
         public decimal ListPrice
         {
@@ -118,8 +134,8 @@ namespace MMN.App.ViewModels
                 if (Model.ListPrice != value)
                 {
                     Model.ListPrice = value;
-                    OnPropertyChanged();
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -133,8 +149,8 @@ namespace MMN.App.ViewModels
                 if (Model.StandardCost != value)
                 {
                     Model.StandardCost = value;
-                    OnPropertyChanged();
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -147,8 +163,8 @@ namespace MMN.App.ViewModels
                 if (Model.Color != value)
                 {
                     Model.Color = value;
-                    OnPropertyChanged();
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -161,8 +177,8 @@ namespace MMN.App.ViewModels
                 if (Model.DaysToManufacture != value)
                 {
                     Model.DaysToManufacture = value;
-                    OnPropertyChanged();
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -175,8 +191,8 @@ namespace MMN.App.ViewModels
                 if (Model.Weight != value)
                 {
                     Model.Weight = value;
-                    OnPropertyChanged();
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -190,8 +206,8 @@ namespace MMN.App.ViewModels
                 if (Model.Description != value)
                 {
                     Model.Description = value;
-                    OnPropertyChanged();
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -199,6 +215,7 @@ namespace MMN.App.ViewModels
 
 
         private Product _selectedProduct;
+        private bool _isLoading;
 
         /// <summary>
         /// Gets or sets the selected product.

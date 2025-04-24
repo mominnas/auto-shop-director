@@ -11,6 +11,7 @@ using MMN.App.Views;
 using MMN.Repository;
 using MMN.Repository.Rest;
 using MMN.Repository.Sql;
+using System;
 
 namespace MMN.App
 {
@@ -86,15 +87,46 @@ namespace MMN.App
         /// </summary>
         public static void UseSqlite()
         {
-            string demoDatabasePath = Package.Current.InstalledLocation.Path + @"\Assets\Contoso.db";
-            string databasePath = ApplicationData.Current.LocalFolder.Path + @"\Contoso.db";
+            string demoDatabasePath;
+            string databasePath;
+
+            try
+            {
+                // For packaged apps
+                demoDatabasePath = Path.Combine(Windows.ApplicationModel.Package.Current.InstalledLocation.Path, "Assets", "Contoso.db");
+                databasePath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "Contoso.db");
+            }
+            catch
+            {
+                // For unpackaged apps
+                demoDatabasePath = Path.Combine(AppContext.BaseDirectory, "Assets", "Contoso.db");
+                databasePath = Path.Combine(AppContext.BaseDirectory, "Contoso.db");
+            }
+
             if (!File.Exists(databasePath))
             {
-                File.Copy(demoDatabasePath, databasePath);
+                try
+                {
+                    File.Copy(demoDatabasePath, databasePath);
+                }
+                catch (Exception ex)
+                {
+                    // Log or handle the error
+                    System.Diagnostics.Debug.WriteLine($"Failed to copy database: {ex.Message}");
+                }
             }
+
             var dbOptions = new DbContextOptionsBuilder<ContosoContext>().UseSqlite(
                 "Data Source=" + databasePath);
             Repository = new SqlContosoRepository(dbOptions);
+
+
+            // Ensure the database is created
+            using (var context = new ContosoContext(dbOptions.Options))
+            {
+                context.Database.EnsureCreated();
+            }
+
         }
 
         /// <summary>

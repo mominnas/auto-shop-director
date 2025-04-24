@@ -31,6 +31,11 @@ namespace MMN.App.ViewModels
             get => _model;
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException(nameof(value), "Model cannot be null.");
+                }
+
                 if (_model != value)
                 {
                     _model = value;
@@ -47,7 +52,7 @@ namespace MMN.App.ViewModels
         /// </summary>
         public string FirstName
         {
-            get => Model.FirstName;
+            get => Model?.FirstName ?? string.Empty;
             set
             {
                 if (value != Model.FirstName)
@@ -65,7 +70,7 @@ namespace MMN.App.ViewModels
         /// </summary>
         public string LastName
         {
-            get => Model.LastName;
+            get => Model?.LastName ?? string.Empty;
             set
             {
                 if (value != Model.LastName)
@@ -89,7 +94,7 @@ namespace MMN.App.ViewModels
         /// </summary>
         public string Address
         {
-            get => Model.Address;
+            get => Model?.Address ?? string.Empty; // Safely handle null values
             set
             {
                 if (value != Model.Address)
@@ -106,7 +111,7 @@ namespace MMN.App.ViewModels
         /// </summary>
         public string Company
         {
-            get => Model.Company;
+            get => Model?.Company ?? string.Empty;
             set
             {
                 if (value != Model.Company)
@@ -123,7 +128,7 @@ namespace MMN.App.ViewModels
         /// </summary>
         public string Phone
         {
-            get => Model.Phone;
+            get => Model?.Phone ?? string.Empty;
             set
             {
                 if (value != Model.Phone)
@@ -140,7 +145,7 @@ namespace MMN.App.ViewModels
         /// </summary>
         public string Email
         {
-            get => Model.Email;
+            get => Model?.Email ?? string.Empty;
             set
             {
                 if (value != Model.Email)
@@ -216,12 +221,14 @@ namespace MMN.App.ViewModels
         {
             IsInEdit = false;
             IsModified = false;
+
             if (IsNewCustomer)
             {
                 IsNewCustomer = false;
                 App.ViewModel.Customers.Add(this);
             }
 
+            // Save the customer to the database
             await App.Repository.Customers.UpsertAsync(Model);
         }
 
