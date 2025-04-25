@@ -217,7 +217,7 @@ namespace MMN.App.Views
         /// <summary>
         /// Adds the new line item to the list of line items.
         /// </summary>
-        private async void AddProductButton_Click(object sender, RoutedEventArgs e)
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.LineItems.Add(ViewModel.NewLineItem.Model);
             ClearCandidateProduct();
@@ -232,7 +232,7 @@ namespace MMN.App.Views
         }
 
         /// <summary>
-        /// Cleears the new line item entry area.
+        /// Clears the new line item entry area.
         /// </summary>
         private void ClearCandidateProduct()
         {
@@ -243,10 +243,10 @@ namespace MMN.App.Views
         /// <summary>
         /// Removes a line item from the order.
         /// </summary>
-        private async void RemoveProduct_Click(object sender, RoutedEventArgs e)
+        private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.LineItems.Remove((sender as FrameworkElement).DataContext as LineItem);
-            await ViewModel.SaveOrderAsync(); // Save changes to the database
+            ViewModel.RemoveLineItem((sender as FrameworkElement).DataContext as LineItem);
         }
 
         /// <summary>

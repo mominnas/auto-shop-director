@@ -64,6 +64,11 @@ namespace MMN.Repository.Sql
 
         public async Task<Order> UpsertAsync(Order order)
         {
+
+            var existing = await _db.Orders.FirstOrDefaultAsync(_order => _order.Id == order.Id);
+
+            var orderState = _db.Entry(order).State;
+
             // Ensure order has a valid customer reference
             if (order.Customer != null)
             {
@@ -86,6 +91,11 @@ namespace MMN.Repository.Sql
             {
                 foreach (var lineItem in order.LineItems)
                 {
+                    orderState = _db.Entry(order).State;
+                    var lineItemState = _db.Entry(lineItem).State;
+
+                    orderState = _db.Entry(order).State;
+
                     if (lineItem.Product != null)
                     {
                         var existingProduct = await _db.Products
@@ -106,7 +116,7 @@ namespace MMN.Repository.Sql
 
 
 
-            var existing = await _db.Orders.FirstOrDefaultAsync(_order => _order.Id == order.Id);
+            
 
             if (null == existing)
             {
