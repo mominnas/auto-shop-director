@@ -66,6 +66,7 @@ namespace MMN.Repository.Sql
         {
             var existing = await _db.Orders
                 .Include(o => o.LineItems)
+                .ThenInclude(l => l.Product)
                 .FirstOrDefaultAsync(_order => _order.Id == order.Id);
 
             if (existing == null)
@@ -99,14 +100,26 @@ namespace MMN.Repository.Sql
                         _db.Entry(existingItem).CurrentValues.SetValues(lineItem);
                         if (lineItem.Product != null)
                         {
-                            existingItem.ProductId = lineItem.Product.Id;
+                            // Use reference to existing product
+                            var product = await _db.Products.FindAsync(lineItem.Product.Id);
+                            existingItem.Product = product;
+                            existingItem.ProductId = product.Id;
                         }
                     }
                     else
                     {
                         // Add new line item
+                        if (lineItem.Product != null)
+                        {
+                            // Use reference to existing product
+                            var product = await _db.Products.FindAsync(lineItem.Product.Id);
+                            lineItem.Product = product;
+                            lineItem.ProductId = product.Id;
+                        }
+
                         lineItem.OrderId = existing.Id;
                         existing.LineItems.Add(lineItem);
+                        _db.LineItems.Add(lineItem);
                     }
                 }
             }
