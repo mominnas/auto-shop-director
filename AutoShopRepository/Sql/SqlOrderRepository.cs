@@ -66,8 +66,40 @@ namespace MMN.Repository.Sql
         {
             var existing = await _db.Orders
                 .Include(o => o.LineItems)
-                .ThenInclude(l => l.Product)
+                    .ThenInclude(l => l.Product)
+                .Include(o => o.Customer)
                 .FirstOrDefaultAsync(_order => _order.Id == order.Id);
+
+            // Ensure order has a valid customer reference
+            if (order.Customer != null)
+            {
+                // Check if customer exists in the current context
+                var existingCustomer = await _db.Customers
+                    .FirstOrDefaultAsync(c => c.Id == order.Customer.Id);
+
+                if (existingCustomer != null)
+                {
+                    // Use the existing customer reference from the context
+                    order.Customer = existingCustomer;
+                    order.CustomerId = existingCustomer.Id;
+                }
+            }
+
+
+            // Handle Products in LineItems first
+            foreach (var lineItem in order.LineItems)
+            {
+                if (lineItem.Product != null)
+                {
+                    // Attach existing product instead of trying to create a new one
+                    var product = await _db.Products.FindAsync(lineItem.Product.Id);
+                    if (product != null)
+                    {
+                        lineItem.Product = product;
+                        lineItem.ProductId = product.Id;
+                    }
+                }
+            }
 
             if (existing == null)
             {
@@ -79,7 +111,7 @@ namespace MMN.Repository.Sql
             {
                 // Update existing order
                 _db.Entry(existing).CurrentValues.SetValues(order);
-                
+
                 // Handle LineItems
                 // Remove deleted line items
                 foreach (var existingItem in existing.LineItems.ToList())

@@ -172,17 +172,20 @@ namespace MMN.App.Views
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             try
-            { 
+            {
                 await ViewModel.SaveOrderAsync();
+                // Update bindings after model is properly updated
                 Bindings.Update();
+                // Optionally refresh the entire view model if needed
+                ViewModel = await OrderViewModel.CreateFromGuid(ViewModel.Id);
             }
             catch (OrderSavingException ex)
             {
                 var dialog = new ContentDialog()
                 {
                     Title = "Unable to save",
-                    Content = $"There was an error saving your order:\n{ex.Message}", 
-                    PrimaryButtonText = "OK"                 
+                    Content = $"There was an error saving your order:\n{ex.Message}",
+                    PrimaryButtonText = "OK"
                 };
                 dialog.XamlRoot = App.Window.Content.XamlRoot;
                 await dialog.ShowAsync();
