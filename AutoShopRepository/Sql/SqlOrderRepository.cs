@@ -64,61 +64,11 @@ namespace MMN.Repository.Sql
 
         public async Task<Order> UpsertAsync(Order order)
         {
+            var existing = await _db.Orders
+                .Include(o => o.LineItems)
+                .FirstOrDefaultAsync(_order => _order.Id == order.Id);
 
-            var existing = await _db.Orders.FirstOrDefaultAsync(_order => _order.Id == order.Id);
-
-            var orderState = _db.Entry(order).State;
-
-            // Ensure order has a valid customer reference
-            if (order.Customer != null)
-            {
-                // Check if customer exists in the current context
-                var existingCustomer = await _db.Customers
-                    .FirstOrDefaultAsync(c => c.Id == order.Customer.Id);
-
-                if (existingCustomer != null)
-                {
-                    // Use the existing customer reference from the context
-                    order.Customer = existingCustomer;
-                    order.CustomerId = existingCustomer.Id;
-                }
-            }
-
-
-
-            // Ensure line items have valid product references
-            if (order.LineItems != null)
-            {
-                foreach (var lineItem in order.LineItems)
-                {
-                    orderState = _db.Entry(order).State;
-                    var lineItemState = _db.Entry(lineItem).State;
-
-                    orderState = _db.Entry(order).State;
-
-                    if (lineItem.Product != null)
-                    {
-                        var existingProduct = await _db.Products
-                            .FirstOrDefaultAsync(p => p.Id == lineItem.Product.Id);
-
-                        if (existingProduct != null)
-                        {
-                            // Use the existing product reference
-                            lineItem.Product = existingProduct;
-                            lineItem.ProductId = existingProduct.Id;
-                            lineItem.Order = order;
-                            lineItem.OrderId = order.Id;
-                            lineItem.Quantity = lineItem.Quantity;
-                        }
-                    }
-                }
-            }
-
-
-
-            
-
-            if (null == existing)
+            if (existing == null)
             {
                 // New order
                 order.InvoiceNumber = _db.Orders.Max(_order => _order.InvoiceNumber) + 1;
@@ -126,7 +76,39 @@ namespace MMN.Repository.Sql
             }
             else
             {
+                // Update existing order
                 _db.Entry(existing).CurrentValues.SetValues(order);
+                
+                // Handle LineItems
+                // Remove deleted line items
+                foreach (var existingItem in existing.LineItems.ToList())
+                {
+                    if (!order.LineItems.Any(l => l.Id == existingItem.Id))
+                    {
+                        _db.LineItems.Remove(existingItem);
+                    }
+                }
+
+                // Update and add line items
+                foreach (var lineItem in order.LineItems)
+                {
+                    var existingItem = existing.LineItems.FirstOrDefault(l => l.Id == lineItem.Id);
+                    if (existingItem != null)
+                    {
+                        // Update existing line item
+                        _db.Entry(existingItem).CurrentValues.SetValues(lineItem);
+                        if (lineItem.Product != null)
+                        {
+                            existingItem.ProductId = lineItem.Product.Id;
+                        }
+                    }
+                    else
+                    {
+                        // Add new line item
+                        lineItem.OrderId = existing.Id;
+                        existing.LineItems.Add(lineItem);
+                    }
+                }
             }
 
             await _db.SaveChangesAsync();

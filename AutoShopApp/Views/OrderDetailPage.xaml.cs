@@ -246,7 +246,6 @@ namespace MMN.App.Views
         private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.LineItems.Remove((sender as FrameworkElement).DataContext as LineItem);
-            ViewModel.RemoveLineItem((sender as FrameworkElement).DataContext as LineItem);
         }
 
         /// <summary>

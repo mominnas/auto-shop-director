@@ -58,9 +58,10 @@ namespace MMN.Repository.Sql
 
         public async Task<Customer> UpsertAsync(Customer customer)
         {
+            // For new customers, ensure they have a valid Id
             if (customer.Id == Guid.Empty)
             {
-                customer.Id = Guid.NewGuid(); // Ensure a new unique Id is generated
+                customer.Id = Guid.NewGuid();
             }
 
             var current = await _db.Customers.FirstOrDefaultAsync(_customer => _customer.Id == customer.Id);
