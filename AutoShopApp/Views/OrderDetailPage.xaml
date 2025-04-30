@@ -135,6 +135,11 @@
                     Icon="Refresh"
                     IsEnabled="{x:Bind ViewModel.CanRefresh, Mode=OneWay}"
                     Label="Refresh" />
+                <AppBarButton
+                    x:Name="printButton"
+                    Click="PrintButton_Click"
+                    Icon="Print"
+                    Label="Print" />
             </CommandBar>
 
             <!--  Order body  -->

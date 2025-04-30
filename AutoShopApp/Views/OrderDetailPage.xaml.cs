@@ -8,6 +8,8 @@ using Microsoft.UI.Xaml.Navigation;
 using Windows.ApplicationModel.Email;
 using MMN.Models;
 using MMN.App.ViewModels;
+using MMN.App.Helpers;
+using System.Threading.Tasks;
 
 namespace MMN.App.Views
 {
@@ -249,6 +251,86 @@ namespace MMN.App.Views
         private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.LineItems.Remove((sender as FrameworkElement).DataContext as LineItem);
+        }
+
+        /// <summary>
+        /// Prints the current order.
+        /// </summary>
+        private async void PrintButton_Click(object sender, RoutedEventArgs e)
+        {
+            var printHelper = new PrintHelper();
+            var contentToPrint = new Grid();
+            
+            // Create content for printing
+            var printContent = new StackPanel
+            {
+                Margin = new Thickness(20)
+            };
+
+            // Add order header
+            printContent.Children.Add(new TextBlock 
+            { 
+                Text = $"Invoice #{ViewModel.InvoiceNumber}",
+                FontSize = 24,
+                Margin = new Thickness(0, 0, 0, 20)
+            });
+
+            // Add customer info
+            printContent.Children.Add(new TextBlock 
+            { 
+                Text = $"Customer: {ViewModel.CustomerName}",
+                Margin = new Thickness(0, 0, 0, 10)
+            });
+            printContent.Children.Add(new TextBlock 
+            { 
+                Text = $"Address: {ViewModel.Address}",
+                Margin = new Thickness(0, 0, 0, 20)
+            });
+
+            // Add order details
+            printContent.Children.Add(new TextBlock 
+            { 
+                Text = $"Date: {ViewModel.DatePlaced:d}",
+                Margin = new Thickness(0, 0, 0, 10)
+            });
+            printContent.Children.Add(new TextBlock 
+            { 
+                Text = $"Status: {ViewModel.OrderStatus}",
+                Margin = new Thickness(0, 0, 0, 20)
+            });
+
+            // Add line items
+            foreach (var item in ViewModel.LineItems)
+            {
+                printContent.Children.Add(new TextBlock 
+                { 
+                    Text = $"{item.Product.Name} x {item.Quantity} @ {item.Product.ListPrice:C}",
+                    Margin = new Thickness(0, 0, 0, 5)
+                });
+            }
+
+            // Add totals
+            printContent.Children.Add(new TextBlock 
+            { 
+                Text = $"Subtotal: {ViewModel.Subtotal:C}",
+                Margin = new Thickness(0, 20, 0, 5)
+            });
+            printContent.Children.Add(new TextBlock 
+            { 
+                Text = $"Tax: {ViewModel.Tax:C}",
+                Margin = new Thickness(0, 0, 0, 5)
+            });
+            printContent.Children.Add(new TextBlock 
+            { 
+                Text = $"Total: {ViewModel.GrandTotal:C}",
+                FontWeight = Microsoft.UI.Text.FontWeights.Bold,
+                Margin = new Thickness(0, 0, 0, 5)
+            });
+
+            contentToPrint.Children.Add(printContent);
+
+            // Print the content
+            await printHelper.Print(App.Window, contentToPrint, $"Invoice #{ViewModel.InvoiceNumber}");
         }
 
         /// <summary>
