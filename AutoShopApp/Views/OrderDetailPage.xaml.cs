@@ -10,6 +10,9 @@ using MMN.Models;
 using MMN.App.ViewModels;
 using MMN.App.Helpers;
 using System.Threading.Tasks;
+using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Shapes;
+using Microsoft.UI.Xaml.Media;
 
 namespace MMN.App.Views
 {
@@ -18,6 +21,10 @@ namespace MMN.App.Views
     /// </summary>
     public sealed partial class OrderDetailPage : Page, INotifyPropertyChanged
     {
+        private readonly String[] CompanyAddress = { "123 Mechanic Street", "Anytown, ST 12345" };
+        private readonly String CompanyPhone = "Phone: (555) 123-4567";
+        private readonly String CompanyName = "7 Star Autos";
+
         /// <summary>
         /// Initializes the page.
         /// </summary>
@@ -261,70 +268,292 @@ namespace MMN.App.Views
             var printHelper = new PrintHelper();
             var contentToPrint = new Grid();
             
-            // Create content for printing
+            // Create content for printing with a professional layout using black text
             var printContent = new StackPanel
             {
-                Margin = new Thickness(20)
+                Margin = new Thickness(40)
             };
 
-            // Add order header
-            printContent.Children.Add(new TextBlock 
-            { 
-                Text = $"Invoice #{ViewModel.InvoiceNumber}",
-                FontSize = 24,
-                Margin = new Thickness(0, 0, 0, 20)
-            });
+            // Add company logo and header
+            var headerGrid = new Grid();
+            headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            // Add customer info
-            printContent.Children.Add(new TextBlock 
-            { 
-                Text = $"Customer: {ViewModel.CustomerName}",
-                Margin = new Thickness(0, 0, 0, 10)
-            });
-            printContent.Children.Add(new TextBlock 
-            { 
-                Text = $"Address: {ViewModel.Address}",
-                Margin = new Thickness(0, 0, 0, 20)
-            });
-
-            // Add order details
-            printContent.Children.Add(new TextBlock 
-            { 
-                Text = $"Date: {ViewModel.DatePlaced:d}",
-                Margin = new Thickness(0, 0, 0, 10)
-            });
-            printContent.Children.Add(new TextBlock 
-            { 
-                Text = $"Status: {ViewModel.OrderStatus}",
-                Margin = new Thickness(0, 0, 0, 20)
-            });
-
-            // Add line items
-            foreach (var item in ViewModel.LineItems)
+            // Add logo
+            var logoImage = new Image
             {
-                printContent.Children.Add(new TextBlock 
-                { 
-                    Text = $"{item.Product.Name} x {item.Quantity} @ {item.Product.ListPrice:C}",
-                    Margin = new Thickness(0, 0, 0, 5)
+                Source = new BitmapImage(new Uri("ms-appx:///Assets/Square150x150Logo.scale-200.png")),
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Width = 150,
+                Height = 100,
+                Margin = new Thickness(0, 0, 0, 20),
+                Stretch = Stretch.Uniform
+            };
+
+            Grid.SetColumn(logoImage, 0);
+            headerGrid.Children.Add(logoImage);
+
+            // Add company info
+            // Add company info with black text
+            var companyInfo = new StackPanel
+            {
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            companyInfo.Children.Add(new TextBlock
+            {
+                Text = CompanyName,  // Use CompanyName variable
+                FontSize = 24,
+                FontWeight = Microsoft.UI.Text.FontWeights.Bold,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+            });
+
+            // Add address lines from CompanyAddress array
+            foreach (var line in CompanyAddress)
+            {
+                companyInfo.Children.Add(new TextBlock
+                {
+                    Text = line,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
                 });
             }
 
-            // Add totals
-            printContent.Children.Add(new TextBlock 
-            { 
-                Text = $"Subtotal: {ViewModel.Subtotal:C}",
-                Margin = new Thickness(0, 20, 0, 5)
+            // Add phone number
+            companyInfo.Children.Add(new TextBlock
+            {
+                Text = CompanyPhone,  // Use CompanyPhone variable
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
             });
-            printContent.Children.Add(new TextBlock 
-            { 
-                Text = $"Tax: {ViewModel.Tax:C}",
-                Margin = new Thickness(0, 0, 0, 5)
+
+            Grid.SetColumn(companyInfo, 1);
+            headerGrid.Children.Add(companyInfo);
+
+            printContent.Children.Add(headerGrid);
+
+            // Add separator
+            printContent.Children.Add(new Rectangle
+            {
+                Height = 2,
+                Fill = new SolidColorBrush(Microsoft.UI.Colors.Gray),
+                Margin = new Thickness(0, 20, 0, 20)
             });
-            printContent.Children.Add(new TextBlock 
-            { 
-                Text = $"Total: {ViewModel.GrandTotal:C}",
+
+            // Add invoice header
+            printContent.Children.Add(new TextBlock
+            {
+                Text = $"INVOICE #{ViewModel.InvoiceNumber}",
+                FontSize = 28,
                 FontWeight = Microsoft.UI.Text.FontWeights.Bold,
-                Margin = new Thickness(0, 0, 0, 5)
+                Margin = new Thickness(0, 0, 0, 20),
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+            });
+
+            // Create grid for customer and invoice details
+            var detailsGrid = new Grid();
+            detailsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            detailsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+            // Customer info panel
+            var customerInfo = new StackPanel { Margin = new Thickness(0, 0, 20, 0) };
+            customerInfo.Children.Add(new TextBlock
+            {
+                Text = "BILL TO:",
+                FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
+                Margin = new Thickness(0, 0, 0, 5),
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+            });
+            customerInfo.Children.Add(new TextBlock 
+            { 
+                Text = ViewModel.CustomerName,
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+            });
+            customerInfo.Children.Add(new TextBlock 
+            { 
+                Text = ViewModel.Address,
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+            });
+            Grid.SetColumn(customerInfo, 0);
+            detailsGrid.Children.Add(customerInfo);
+
+            // Invoice details panel
+            var invoiceDetails = new StackPanel
+            {
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            invoiceDetails.Children.Add(new TextBlock
+            {
+                Text = $"Date: {ViewModel.DatePlaced:d}",
+                Margin = new Thickness(0, 0, 0, 5),
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+            });
+            invoiceDetails.Children.Add(new TextBlock
+            {
+                Text = $"Status: {ViewModel.OrderStatus}",
+                Margin = new Thickness(0, 0, 0, 5),
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+            });
+            Grid.SetColumn(invoiceDetails, 1);
+            detailsGrid.Children.Add(invoiceDetails);
+
+            printContent.Children.Add(detailsGrid);
+
+            // Add separator before line items
+            printContent.Children.Add(new Rectangle
+            {
+                Height = 2,
+                Fill = new SolidColorBrush(Microsoft.UI.Colors.Gray),
+                Margin = new Thickness(0, 20, 0, 10)
+            });
+
+            // Add line items header with background and borders
+            var lineItemsHeader = new Grid 
+            { 
+                Margin = new Thickness(0, 0, 0, 10),
+                Background = new SolidColorBrush(Microsoft.UI.Colors.LightGray)
+            };
+            lineItemsHeader.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
+            lineItemsHeader.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            lineItemsHeader.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            lineItemsHeader.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+            var headers = new[] { "Description", "Quantity", "Unit Price", "Amount" };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                lineItemsHeader.Children.Add(new TextBlock
+                {
+                    Text = headers[i],
+                    FontWeight = Microsoft.UI.Text.FontWeights.Bold,
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(5),
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+                });
+                Grid.SetColumn((FrameworkElement)lineItemsHeader.Children[i], i);
+            }
+            printContent.Children.Add(lineItemsHeader);
+
+            // Add line items with alternating row colors
+            for (int index = 0; index < ViewModel.LineItems.Count; index++)
+            {
+                var item = ViewModel.LineItems[index];
+                var lineItemGrid = new Grid 
+                { 
+                    Margin = new Thickness(0, 0, 0, 5),
+                    Background = index % 2 == 0 
+                        ? new SolidColorBrush(Microsoft.UI.Colors.White) 
+                        : new SolidColorBrush(Microsoft.UI.Colors.WhiteSmoke)
+                };
+                lineItemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
+                lineItemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                lineItemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                lineItemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+                var productName = new TextBlock 
+                { 
+                    Text = item.Product.Name, 
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(5),
+                    TextWrapping = TextWrapping.Wrap,
+                    Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+                };
+                var quantity = new TextBlock 
+                { 
+                    Text = item.Quantity.ToString(), 
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(5),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+                };
+                var unitPrice = new TextBlock 
+                { 
+                    Text = item.Product.ListPrice.ToString("C"), 
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(5),
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+                };
+                var amount = new TextBlock 
+                { 
+                    Text = (item.Quantity * item.Product.ListPrice).ToString("C"), 
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(5),
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
+                    Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+                };
+
+                Grid.SetColumn(productName, 0);
+                Grid.SetColumn(quantity, 1);
+                Grid.SetColumn(unitPrice, 2);
+                Grid.SetColumn(amount, 3);
+
+                lineItemGrid.Children.Add(productName);
+                lineItemGrid.Children.Add(quantity);
+                lineItemGrid.Children.Add(unitPrice);
+                lineItemGrid.Children.Add(amount);
+
+                printContent.Children.Add(lineItemGrid);
+            }
+
+            // Add separator before totals
+            printContent.Children.Add(new Rectangle
+            {
+                Height = 1,
+                Fill = new SolidColorBrush(Microsoft.UI.Colors.Gray),
+                Margin = new Thickness(0, 10, 0, 10)
+            });
+
+            // Add totals with black text
+            var totalsPanel = new Border
+            {
+                BorderBrush = new SolidColorBrush(Microsoft.UI.Colors.Gray),
+                BorderThickness = new Thickness(0, 1, 0, 0),
+                Padding = new Thickness(10),
+                Child = new StackPanel
+                {
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Margin = new Thickness(0, 10, 0, 20),
+                    Children =
+                    {
+                        new TextBlock
+                        {
+                            Text = $"Subtotal: {ViewModel.Subtotal:C}",
+                            Margin = new Thickness(0, 0, 0, 5),
+                            HorizontalAlignment = HorizontalAlignment.Right,
+                            Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+                        },
+                        new TextBlock
+                        {
+                            Text = $"Tax: {ViewModel.Tax:C}",
+                            Margin = new Thickness(0, 0, 0, 5),
+                            HorizontalAlignment = HorizontalAlignment.Right,
+                            Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+                        },
+                        new TextBlock
+                        {
+                            Text = $"Total: {ViewModel.GrandTotal:C}",
+                            FontWeight = Microsoft.UI.Text.FontWeights.Bold,
+                            Margin = new Thickness(0, 5, 0, 5),
+                            HorizontalAlignment = HorizontalAlignment.Right,
+                            FontSize = 16,
+                            Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
+                        }
+                    }
+                }
+            };
+
+            printContent.Children.Add(totalsPanel);
+
+            // Add thank you note
+            printContent.Children.Add(new TextBlock
+            {
+                Text = "Thank you for your business!",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                FontStyle = Windows.UI.Text.FontStyle.Italic,
+                Margin = new Thickness(0, 20, 0, 0),
+                Foreground = new SolidColorBrush(Microsoft.UI.Colors.Black)
             });
 
             contentToPrint.Children.Add(printContent);
