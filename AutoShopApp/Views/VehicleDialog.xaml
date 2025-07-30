@@ -1,0 +1,27 @@
+<!-- AutoShopApp\Views\VehicleDialog.xaml -->
+<ContentDialog
+    x:Class="MMN.App.Views.VehicleDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:MMN.App.ViewModels"
+    Title="Vehicle"
+    PrimaryButtonText="Save"
+    CloseButtonText="Cancel"
+    DefaultButton="Primary">
+
+    <StackPanel Spacing="12" Padding="8">
+        <TextBox Header="Make"
+                 Text="{x:Bind VehicleViewModel.Make, Mode=TwoWay}"
+                 PlaceholderText="Enter make" />
+        <TextBox Header="Model"
+                 Text="{x:Bind VehicleViewModel.ModelName, Mode=TwoWay}"
+                 PlaceholderText="Enter model" />
+        <TextBox Header="Year"
+                 Text="{x:Bind VehicleViewModel.Year, Mode=TwoWay}"
+                 InputScope="Number"
+                 PlaceholderText="Enter year" />
+        <TextBox Header="VIN"
+                 Text="{x:Bind VehicleViewModel.VIN, Mode=TwoWay}"
+                 PlaceholderText="Enter VIN" />
+    </StackPanel>
+</ContentDialog>
