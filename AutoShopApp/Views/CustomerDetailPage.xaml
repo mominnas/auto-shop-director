@@ -283,6 +283,50 @@
 
                     </Grid>
                 </muxc:Expander>
+
+                <muxc:Expander x:Name="VehiclesExpander" IsExpanded="True">
+                    <muxc:Expander.Header>
+                        <TextBlock
+            Text="Vehicles"
+            Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                    </muxc:Expander.Header>
+
+                    <Grid Margin="0,4,0,0">
+                        <toolkit:DataGrid
+            x:Name="VehiclesDataGrid"
+            BorderThickness="0"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="False"
+            GridLinesVisibility="None"
+            IsReadOnly="True"
+            AutoGenerateColumns="False"
+            ItemsSource="{x:Bind ViewModel.Vehicles, Mode=OneWay}"
+            SelectedItem="{x:Bind ViewModel.SelectedVehicle, Mode=TwoWay}">
+                            <toolkit:DataGrid.Columns>
+                                <toolkit:DataGridTextColumn
+                    Header="Make"
+                    Binding="{Binding Make}" />
+                                <toolkit:DataGridTextColumn
+                    Header="Model"
+                    Binding="{Binding ModelName}" />
+                                <toolkit:DataGridTextColumn
+                    Header="Year"
+                    Binding="{Binding Year}" />
+                                <toolkit:DataGridTextColumn
+                    Header="VIN"
+                    Binding="{Binding VIN}" />
+                            </toolkit:DataGrid.Columns>
+                        </toolkit:DataGrid>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+                            <Button Content="Add Vehicle" Click="AddVehicle_Click"/>
+                            <Button Content="Edit Vehicle" Click="EditVehicle_Click" IsEnabled="{x:Bind ViewModel.SelectedVehicle, Mode=OneWay}"/>
+                            <Button Content="Delete Vehicle" Click="DeleteVehicle_Click" IsEnabled="{x:Bind ViewModel.SelectedVehicle, Mode=OneWay}"/>
+                        </StackPanel>
+                    </Grid>
+                </muxc:Expander>
+
+
             </StackPanel>
         </ScrollViewer>
 

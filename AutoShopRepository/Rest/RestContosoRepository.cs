@@ -21,5 +21,7 @@ namespace MMN.Repository.Rest
         public IOrderRepository Orders => new RestOrderRepository(_url, _accessToken);
 
         public IProductRepository Products => new RestProductRepository(_url, _accessToken); 
+
+        public IVehicleRepository Vehicles => new RestVehicleRepository(_url, _accessToken);
     }
 }

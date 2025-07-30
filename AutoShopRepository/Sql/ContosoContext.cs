@@ -33,5 +33,10 @@ namespace MMN.Repository.Sql
         /// Gets the line items DbSet.
         /// </summary>
         public DbSet<LineItem> LineItems { get; set; }
+
+        /// <summary>
+        /// Gets the vehicles DbSet.
+        /// </summary>
+        public DbSet<Vehicle> Vehicles { get; set; }
     }
 }

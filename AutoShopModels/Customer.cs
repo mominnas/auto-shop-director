@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace MMN.Models
 {
@@ -41,6 +42,11 @@ namespace MMN.Models
         /// Returns the customer's name.
         /// </summary>
         public override string ToString() => $"{FirstName} {LastName}";
+
+        /// <summary>
+        /// Gets or sets the vehicles owned by the customer.
+        /// </summary>
+        public List<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
 
         public bool Equals(Customer other) =>
             FirstName == other.FirstName &&

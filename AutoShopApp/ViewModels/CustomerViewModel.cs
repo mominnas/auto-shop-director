@@ -24,6 +24,34 @@ namespace MMN.App.ViewModels
         private Customer _model;
 
         /// <summary>
+        /// Gets the collection of vehicles owned by the customer.
+        /// </summary>
+        public ObservableCollection<VehicleViewModel> Vehicles { get; } = new ObservableCollection<VehicleViewModel>();
+
+        /// <summary>
+        /// Loads the vehicles for the customer.
+        /// </summary>
+        public async Task LoadVehiclesAsync()
+        {
+            var vehicles = await App.Repository.Vehicles.GetForCustomerAsync(Model.Id);
+            Vehicles.Clear();
+            foreach (var vehicle in vehicles)
+            {
+                Vehicles.Add(new VehicleViewModel(vehicle));
+            }
+        }
+
+        private VehicleViewModel _selectedVehicle;
+        /// <summary>
+        /// Gets or sets the selected vehicle for the customer.
+        /// </summary>
+        public VehicleViewModel SelectedVehicle
+        {
+            get => _selectedVehicle;
+            set => Set(ref _selectedVehicle, value);
+        }
+
+        /// <summary>
         /// Gets or sets the underlying Customer object.
         /// </summary>
         public Customer Model

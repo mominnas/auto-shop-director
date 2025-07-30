@@ -21,5 +21,10 @@ namespace MMN.Repository
         /// Returns the products repository.
         /// </summary>
         IProductRepository Products { get;  }
+
+        /// <summary>
+        /// Returns the products repository.
+        /// </summary>
+        IVehicleRepository Vehicles { get; }
     }
 }

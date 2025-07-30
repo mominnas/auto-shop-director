@@ -29,5 +29,8 @@ namespace MMN.Repository.Sql
 
         public IProductRepository Products => new SqlProductRepository(
             new ContosoContext(_dbOptions));
+
+        public IVehicleRepository Vehicles => new SqlVehicleRepository(
+            new ContosoContext(_dbOptions));
     }
 }
