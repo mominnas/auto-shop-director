@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ContosoModels
+namespace AutoShop.Models
 {
     /// <summary>
     /// Contains constant values you'll need to insert before running the sample. 

@@ -216,6 +216,8 @@ namespace MMN.App.ViewModels
             try
             {
                 result = await App.Repository.Vehicles.UpsertAsync(Model);
+
+                var savedVehicle = await App.Repository.Vehicles.GetAsync(result.Id);
             }
             catch (Exception ex)
             {

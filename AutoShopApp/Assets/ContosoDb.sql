@@ -74,6 +74,18 @@ CREATE TABLE [LineItems] (
 ) ON [PRIMARY];
 GO
 
+
+PRINT '-- CREATE VEHICLES TABLE --';
+CREATE TABLE [Vehicles] (
+    [Id]           [UNIQUEIDENTIFIER] CONSTRAINT [PK_Vehicles] PRIMARY KEY,
+    [Make]         [VARCHAR](MAX) NOT NULL,
+    [Model]        [VARCHAR](MAX) NOT NULL,
+    [Year]         [INT] NOT NULL,
+    [VIN]          [VARCHAR](MAX) NOT NULL,
+    [CustomerId]   [UNIQUEIDENTIFIER] CONSTRAINT [FK_Vehicles_Customers_CustomerId] NOT NULL REFERENCES [Customers] ([Id]) ON DELETE CASCADE
+) ON [PRIMARY];
+GO
+
 PRINT '-- POPULATE CUSTOMERS TABLE --';
 INSERT INTO [Customers] ("Id","Address","Company","Email","FirstName","LastName","Phone") VALUES ('E7E9AF6E-503A-444B-B596-004C32DE93BF','7710 Medina Drive, East Brisbane WA 4169','Northwind','dawn45@adventure-works.com','Dawn','Raji','1 (11) 500 555-0126'),
  ('2E3D63FF-4344-4615-A3E8-B50147BAAD7C','8675 Line Court, Berkshire WA RG11 5TP','Northwind','karl13@adventure-works.com','Karl','Pal','1 (11) 500 555-0188'),

@@ -27,6 +27,9 @@ namespace MMN.App
         public static Window Window { get { return m_window; } }
         private static Window m_window;
 
+        // private static string dBName = "Contoso.db";
+        private static string dBName = "AutoShop.db";
+
         /// <summary>
         /// Gets the app-wide MainViewModel singleton instance.
         /// </summary>
@@ -93,14 +96,14 @@ namespace MMN.App
             try
             {
                 // For packaged apps
-                demoDatabasePath = Path.Combine(Windows.ApplicationModel.Package.Current.InstalledLocation.Path, "Assets", "Contoso.db");
-                databasePath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "Contoso.db");
+                demoDatabasePath = Path.Combine(Windows.ApplicationModel.Package.Current.InstalledLocation.Path, "Assets", dBName);
+                databasePath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, dBName);
             }
             catch
             {
                 // For unpackaged apps
-                demoDatabasePath = Path.Combine(AppContext.BaseDirectory, "Assets", "Contoso.db");
-                databasePath = Path.Combine(AppContext.BaseDirectory, "Contoso.db");
+                demoDatabasePath = Path.Combine(AppContext.BaseDirectory, "Assets", dBName);
+                databasePath = Path.Combine(AppContext.BaseDirectory, dBName);
             }
 
             if (!File.Exists(databasePath))

@@ -64,6 +64,11 @@ namespace MMN.Repository.Sql
                 {
                     _db.Entry(existing).CurrentValues.SetValues(vehicle);
                 }
+                else
+                {
+                    // If the vehicle does not exist, add it as a new entry
+                    _db.Vehicles.Add(vehicle);
+                }
             }
 
             await _db.SaveChangesAsync();

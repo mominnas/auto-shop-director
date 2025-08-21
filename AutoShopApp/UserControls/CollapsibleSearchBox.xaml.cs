@@ -58,7 +58,10 @@ namespace MMN.App.UserControls
 
         private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            SetState(App.Window.Bounds.Width);
+            if (App.Window != null)
+            {
+                SetState(App.Window.Bounds.Width);
+            }
             SearchButton.IsChecked = false;
         }
 

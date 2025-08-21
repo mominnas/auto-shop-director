@@ -91,6 +91,7 @@
                     KeyDown="DataGrid_KeyDown"
                     RightTapped="DataGrid_RightTapped"
                     DoubleTapped="DataGrid_DoubleTapped"
+                    IsReadOnly="{x:Bind vm:Converters.Not(ViewModel.SelectedCustomer.IsInEdit), Mode=OneWay}"
                     ContextFlyout="{StaticResource DataGridContextMenu}">
                 <toolkit:DataGrid.Columns>
                     <toolkit:DataGridTextColumn

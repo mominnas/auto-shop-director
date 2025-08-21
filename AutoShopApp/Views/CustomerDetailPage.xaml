@@ -49,6 +49,11 @@
                     Label="Add order"
                     Visibility="{x:Bind vm:Converters.CollapsedIf(ViewModel.IsNewCustomer), Mode=OneWay}"/>
             <AppBarButton
+                    Click="AddVehicle_Click"
+                    Icon="Shop"
+                    Label="Add vehicle"
+                    Visibility="{x:Bind vm:Converters.CollapsedIf(ViewModel.IsNewCustomer), Mode=OneWay}"/>
+            <AppBarButton
                     Click="{x:Bind ViewModel.RefreshOrders}"
                     Icon="Refresh"
                     Label="Refresh orders"
@@ -302,6 +307,11 @@
             AutoGenerateColumns="False"
             ItemsSource="{x:Bind ViewModel.Vehicles, Mode=OneWay}"
             SelectedItem="{x:Bind ViewModel.SelectedVehicle, Mode=TwoWay}">
+                            <toolkit:DataGrid.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Delete Vehicle" Click="DeleteVehicleMenuItem_Click"/>
+                                </MenuFlyout>
+                            </toolkit:DataGrid.ContextFlyout>
                             <toolkit:DataGrid.Columns>
                                 <toolkit:DataGridTextColumn
                     Header="Make"
@@ -318,11 +328,7 @@
                             </toolkit:DataGrid.Columns>
                         </toolkit:DataGrid>
 
-                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
-                            <Button Content="Add Vehicle" Click="AddVehicle_Click"/>
-                            <Button Content="Edit Vehicle" Click="EditVehicle_Click" IsEnabled="{x:Bind ViewModel.SelectedVehicle, Mode=OneWay}"/>
-                            <Button Content="Delete Vehicle" Click="DeleteVehicle_Click" IsEnabled="{x:Bind ViewModel.SelectedVehicle, Mode=OneWay}"/>
-                        </StackPanel>
+                        
                     </Grid>
                 </muxc:Expander>
 
