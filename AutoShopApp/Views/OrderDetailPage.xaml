@@ -260,19 +260,7 @@
                                 ItemsSource="{x:Bind ViewModel.OrderStatusValues}"
                                 SelectedItem="{x:Bind ViewModel.OrderStatus.ToString(), BindBack=ViewModel.SetOrderStatus, Mode=TwoWay}" />
                         </StackPanel>
-                        <StackPanel
-                            x:Name="PaymentTerm"
-                            Margin="0,0,0,0"
-                            HorizontalAlignment="Right">
-                            <TextBlock
-                                Margin="0,20,0,0"
-                                FontWeight="Normal">
-                                Payment term
-                            </TextBlock>
-                            <ComboBox
-                                ItemsSource="{x:Bind ViewModel.TermValues}"
-                                SelectedItem="{x:Bind ViewModel.Term.ToString(), BindBack=ViewModel.SetTerm, Mode=TwoWay}" />
-                        </StackPanel>
+                        
                         <StackPanel
                             x:Name="PaymentStatus"
                             Margin="0,0,0,0"
@@ -612,7 +600,6 @@
                         <Setter Target="StatusPanel.(Grid.Column)" Value="0" />
                         <Setter Target="StatusPanel.HorizontalAlignment" Value="Left" />
                         <Setter Target="OrderStatus.HorizontalAlignment" Value="Left" />
-                        <Setter Target="PaymentTerm.HorizontalAlignment" Value="Left" />
                         <Setter Target="PaymentStatus.HorizontalAlignment" Value="Left" />
                         <Setter Target="totalsPanel.HorizontalAlignment" Value="Right" />
                         <Setter Target="SpacerColumn.Width" Value="0" />

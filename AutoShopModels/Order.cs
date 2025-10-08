@@ -76,10 +76,7 @@ namespace MMN.Models
         /// </summary>
         public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Unpaid;
 
-        /// <summary>
-        /// Gets or sets the order's term.
-        /// </summary>
-        public Term Term { get; set; }
+        
 
         /// <summary>
         /// Gets the order's subtotal.
@@ -102,16 +99,7 @@ namespace MMN.Models
         public override string ToString() => InvoiceNumber.ToString();
     }
 
-    /// <summary>
-    /// Represents the term for an order.
-    /// </summary>
-    public enum Term
-    {
-        Net1, 
-        Net5,
-        Net15, 
-        Net30
-    }
+    
 
     /// <summary>
     /// Represents the payment status for an order.

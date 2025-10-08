@@ -378,33 +378,7 @@ namespace MMN.App.ViewModels
             }
         }
 
-        /// <summary>
-        /// Gets the set of payment term values, so we can populate the term combo box. 
-        /// </summary>
-        public List<string> TermValues => Enum.GetNames(typeof(Term)).ToList();
-
-        /// <summary>
-        /// Sets the Term property by parsing a string representation of the enum value.
-        /// </summary>
-        public Term SetTerm(object value) => Term = value == null ?
-            Term.Net1 : (Term)Enum.Parse(typeof(Term), value as string);
-
-        /// <summary>
-        /// Gets or sets the payment term.
-        /// </summary>
-        public Term Term
-        {
-            get => Model.Term;
-            set
-            {
-                if (Model.Term != value)
-                {
-                    Model.Term = value;
-                    OnPropertyChanged();
-                    IsModified = true;
-                }
-            }
-        }
+        
 
         /// <summary>
         /// Gets the set of order status values so we can populate the order status combo box. 

@@ -28,7 +28,7 @@ namespace MMN.App
         private static Window m_window;
 
         //private static string dBName = "Contoso.db";
-        private static string dBName = "AutoShop.db";
+        private static string dBName = "AutoShop3.db";
 
         /// <summary>
         /// Gets the app-wide MainViewModel singleton instance.

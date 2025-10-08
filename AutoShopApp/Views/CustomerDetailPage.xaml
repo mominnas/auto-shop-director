@@ -273,9 +273,6 @@
                                         Header="Status"
                                         Tag="PaymentStatus"
                                         Binding="{Binding PaymentStatus}"/>
-                                <toolkit:DataGridTextColumn
-                                        Header="Term"
-                                        Binding="{Binding Term}"/>
                             </toolkit:DataGrid.Columns>
                         </toolkit:DataGrid>
 
