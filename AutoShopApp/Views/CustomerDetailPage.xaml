@@ -325,10 +325,16 @@
                                 <toolkit:DataGridTextColumn
                     Header="VIN"
                     Binding="{Binding VIN}" />
+                                <toolkit:DataGridTextColumn
+                    Header="License"
+                    Binding="{Binding License}" />
+                                <toolkit:DataGridTextColumn
+                    Header="Engine"
+                    Binding="{Binding Engine}" />
+
                             </toolkit:DataGrid.Columns>
                         </toolkit:DataGrid>
 
-                        
                     </Grid>
                 </muxc:Expander>
 

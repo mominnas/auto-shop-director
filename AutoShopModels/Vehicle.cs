@@ -30,6 +30,16 @@ namespace MMN.Models
         public string VIN { get; set; }
 
         /// <summary>
+        /// Gets or sets the License.
+        /// </summary>
+        public string License { get; set; }
+
+        /// <summary>
+        /// Gets or sets the engine information.
+        /// </summary>
+        public string Engine { get; set; }
+
+        /// <summary>
         /// Gets or sets the customer who owns the vehicle.
         /// </summary>
         public Guid CustomerId { get; set; }

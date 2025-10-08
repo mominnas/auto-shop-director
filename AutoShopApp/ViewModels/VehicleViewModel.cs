@@ -94,6 +94,42 @@ namespace MMN.App.ViewModels
             }
         }
 
+
+        /// <summary>
+        /// Gets or sets the vehicle's License.
+        /// </summary>
+        public string License
+        {
+            get => Model.License;
+            set
+            {
+                if (Model.License != value)
+                {
+                    Model.License = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Gets or sets the vehicle's Engine type.
+        /// </summary>
+        public string Engine
+        {
+            get => Model.Engine;
+            set
+            {
+                if (Model.Engine != value)
+                {
+                    Model.Engine = value;
+                    IsModified = true;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the vehicle's model.
         /// </summary>

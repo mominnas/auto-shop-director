@@ -21,9 +21,12 @@ namespace MMN.App.Views
     /// </summary>
     public sealed partial class OrderDetailPage : Page, INotifyPropertyChanged
     {
-        private readonly String[] CompanyAddress = { "123 Mechanic Street", "Anytown, ST 12345" };
-        private readonly String CompanyPhone = "Phone: (555) 123-4567";
-        private readonly String CompanyName = "7 Star Autos";
+        private readonly String[] CompanyAddress = { "1312 Britannia RD E UNIT 19", "Mississauga, ON L4W 1C8" };
+        private readonly String CompanyPhone = "Phone: (905) 696-8786";
+        private readonly String CompanyName = "7 Star Auto Care Inc.";
+        private readonly String CompanyEmail = "7StarAutoCare@gmail.com";
+        private readonly String TaxId = "826929085RT0001";
+
 
         /// <summary>
         /// Initializes the page.

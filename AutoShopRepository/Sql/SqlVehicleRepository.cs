@@ -45,7 +45,9 @@ namespace MMN.Repository.Sql
                 vehicle.Make.StartsWith(value) ||
                 vehicle.Model.StartsWith(value) ||
                 vehicle.Year.ToString().StartsWith(value) ||
-                vehicle.VIN.ToString().StartsWith(value))
+                vehicle.VIN.ToString().StartsWith(value) ||
+                vehicle.Engine.ToString().StartsWith(value) ||
+                vehicle.License.ToString().StartsWith(value))
             .AsNoTracking()
             .ToListAsync();
         }

@@ -27,7 +27,7 @@ namespace MMN.App
         public static Window Window { get { return m_window; } }
         private static Window m_window;
 
-        // private static string dBName = "Contoso.db";
+        //private static string dBName = "Contoso.db";
         private static string dBName = "AutoShop.db";
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace MMN.App
         }
 
         /// <summary>
-        /// Configures the app to use the Sqlite data source. If no existing Sqlite database exists, 
+        /// Configures the app to use the SQLite data source. If no existing SQLite database exists, 
         /// loads a demo database filled with fake data so the app has content.
         /// </summary>
         public static void UseSqlite()

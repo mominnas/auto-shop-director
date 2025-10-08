@@ -14,6 +14,8 @@
             <TextBox Header="Model" Text="{x:Bind ViewModel.ModelName, Mode=TwoWay}" Margin="0,8"/>
             <TextBox Header="Year" Text="{x:Bind ViewModel.Year, Mode=TwoWay}" Margin="0,8"/>
             <TextBox Header="VIN" Text="{x:Bind ViewModel.VIN, Mode=TwoWay}" Margin="0,8"/>
+            <TextBox Header="License" Text="{x:Bind ViewModel.License, Mode=TwoWay}" Margin="0,8"/>
+            <TextBox Header="Engine" Text="{x:Bind ViewModel.Engine, Mode=TwoWay}" Margin="0,8"/>
             <StackPanel Orientation="Horizontal" Margin="0,16,0,0" Spacing="8">
                 <Button Content="Save" Click="SaveButton_Click"/>
                 <Button Content="Cancel" Click="CancelButton_Click"/>
