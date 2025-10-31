@@ -57,47 +57,48 @@ public class InvoiceDocument : IDocument
         {
             col.Item().PaddingTop(10);
 
+            
             // Top row: Customer info box (left) and Vehicle info box (right)
             col.Item().Row(row =>
             {
                 // Customer info box (left)
                 row.RelativeItem().Element(c => c
                     .Border(1)
-                    .Padding(10)
+                    .Padding(5)
                     .Column(customerCol =>
                     {
                         // Title at the top
                         customerCol.Item().Text("Customer Information").SemiBold().FontSize(12);
 
                         // Line under the title
-                        customerCol.Item().LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                        customerCol.Item().LineHorizontal(1).LineColor(Colors.Black);
 
                         // Customer details
-                        customerCol.Item().Text(_order.CustomerName ?? string.Empty).FontSize(12);
-                        customerCol.Item().Text(_order.Address ?? string.Empty).FontSize(12);
-                        customerCol.Item().Text(_order.Customer?.Phone ?? string.Empty).FontSize(12);
-                        customerCol.Item().Text(_order.Customer?.Email ?? string.Empty).FontSize(12);
+                        customerCol.Item().Text(_order.CustomerName ?? string.Empty).FontSize(10);
+                        customerCol.Item().Text(_order.Address ?? string.Empty).FontSize(10);
+                        customerCol.Item().Text(_order.Customer?.Phone ?? string.Empty).FontSize(10);
+                        customerCol.Item().Text(_order.Customer?.Email ?? string.Empty).FontSize(10);
                     })
                 );
 
                 // Small spacer between boxes
-                row.ConstantItem(2);
+                row.ConstantItem(0);
 
                 // Vehicle info box (right)
                 row.RelativeItem().Element(c => c
                     .Border(1)
-                    .Padding(10)
+                    .Padding(5)
                     .Column(vehicleCol =>
                     {
                         // Title at the top
                         vehicleCol.Item().Text("VEHICLE:").SemiBold().FontSize(12);
 
                         // Line under the title
-                        vehicleCol.Item().LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                        vehicleCol.Item().LineHorizontal(1).LineColor(Colors.Black);
 
                         // Vehicle details
                         var vehicle = _order.Customer?.Vehicles?.FirstOrDefault();
-                        vehicleCol.Item().Text(vehicle?.ToString() ?? "N/A").FontSize(12);
+                        vehicleCol.Item().Text(vehicle?.ToString() ?? "N/A").FontSize(10);
                         // If you have strongly-typed vehicle fields, display them here.
                     })
                 );
@@ -105,21 +106,26 @@ public class InvoiceDocument : IDocument
 
             col.Item().EnsureSpace(10);
 
+            col.Item().PaddingBottom(5);
+
             // Invoice metadata
             col.Item().Row(r =>
             {
                 r.RelativeItem().Column(left =>
                 {
                     left.Item().Text($"Invoice #: {_order.InvoiceNumber}").Bold();
-                    left.Item().Text($"Date: {_order.DatePlaced:MM/dd/yyyy}");
+                    
                 });
 
                 r.ConstantItem(200).Column(right =>
                 {
-                    right.Item().AlignRight().Text($"Customer: {_order.CustomerName}");
-                    right.Item().AlignRight().Text($"Address: {_order.Address}");
+                    //right.Item().AlignRight().Text($"Customer: {_order.CustomerName}");
+                    //right.Item().AlignRight().Text($"Address: {_order.Address}");
+                    right.Item().AlignRight().Text($"Date: {_order.DatePlaced:MM/dd/yyyy}");
                 });
             });
+
+            col.Item().PaddingTop(5);
 
             col.Item().EnsureSpace(5);
 
